@@ -1,0 +1,30 @@
+{
+  "name": "ifsp-desenvwebii2026-i-multirealestateproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flgc/Ifsp-DesenvWebII2026-I-LectureAppProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Flgc/Ifsp-DesenvWebII2026-I-LectureAppProject/issues"
+  },
+  "homepage": "https://github.com/Flgc/Ifsp-DesenvWebII2026-I-LectureAppProject#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
