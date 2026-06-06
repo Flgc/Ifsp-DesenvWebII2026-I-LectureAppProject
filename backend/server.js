@@ -5,6 +5,9 @@ require("dotenv").config();
 const authRoutes =
     require("./routes/auth.routes");
 
+const palestraRoutes =
+require("./routes/palestra.routes");    
+
 const app = express();
 
 app.use(cors());
@@ -14,6 +17,11 @@ app.use(express.json());
 app.use(
     "/api",
     authRoutes
+);
+
+app.use(
+    "/api",
+    palestraRoutes
 );
 
 app.get("/", (req, res) => {
