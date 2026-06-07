@@ -1,0 +1,171 @@
+<nav
+ class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+ <div class="container">
+
+  <a
+   class="navbar-brand">
+
+   Sistema de Palestras
+
+  </a>
+
+  <div class="d-flex">
+
+   <span
+    class="text-white me-3">
+
+    {{usuario?.nome}}
+
+   </span>
+
+   <button
+    class="btn btn-light btn-sm"
+    (click)="logout()">
+
+    Sair
+
+   </button>
+
+  </div>
+
+ </div>
+
+</nav>
+
+<div class="container mt-4">
+
+ <div
+  *ngIf="isAdmin()"
+  class="mb-4">
+
+  <a
+   routerLink="/admin"
+   class="btn btn-success">
+
+   Nova Palestra
+
+  </a>
+
+ </div>
+
+ <div
+  *ngIf="carregando"
+  class="text-center">
+
+  Carregando...
+
+ </div>
+
+ <div class="row">
+
+  <div
+   class="col-md-4 mb-4"
+   *ngFor="let p of palestras">
+
+   <div
+    class="card shadow h-100">
+
+    <div
+     class="card-body">
+
+      <h4>
+
+       {{p.titulo}}
+
+      </h4>
+
+      <p>
+
+       {{p.descricao}}
+
+      </p>
+
+      <hr>
+
+      <p>
+
+       <strong>
+        Palestrante:
+       </strong>
+
+       {{p.nomePalestrante}}
+
+      </p>
+
+      <p>
+
+       <strong>
+        Local:
+       </strong>
+
+       {{p.localEvento}}
+
+      </p>
+
+      <p>
+
+       <strong>
+        Data:
+       </strong>
+
+       {{p.dataEvento
+       | date:'dd/MM/yyyy HH:mm'}}
+
+      </p>
+
+      <p>
+
+       <strong>
+        Inscritos:
+       </strong>
+
+       {{p.totalInscritos}}
+
+      </p>
+
+    </div>
+
+    <div
+     class="card-footer bg-white">
+
+      <button
+       class="btn btn-primary w-100 mb-2"
+       (click)="participar(p.id)">
+
+       Participar
+
+      </button>
+
+      <button
+       class="btn btn-warning w-100 mb-2"
+       (click)="cancelar(p.id)">
+       Cancelar Inscrição
+      </button>
+
+<!--
+       *ngIf="isAdmin()">
+       <button
+        class="btn btn-secondary w-100 mb-2"
+        (click)="editarEvento(p.id)">
+        Editar
+       </button> -->
+       
+        @if (isAdmin()) {
+        <div>
+            <button class="btn btn-secondary w-100 mb-2" 
+                (click)="editarEvento(p.id)">
+                Editar
+            </button>
+
+            <button class="btn btn-danger w-100"
+                (click)="excluirEvento(p.id)">
+                Excluir
+            </button>
+        </div>
+        }      
+    </div>
+   </div>
+  </div>
+ </div>
+</div>

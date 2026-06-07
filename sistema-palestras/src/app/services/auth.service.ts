@@ -11,7 +11,6 @@ export class AuthService {
     login(
         usuario:Usuario
     ):void {
-
         localStorage.setItem(
             'userData',
             JSON.stringify(usuario)
@@ -19,21 +18,18 @@ export class AuthService {
     }
 
     logout():void {
-
         localStorage.removeItem(
             'userData'
         );
     }
 
     getUser():Usuario|null {
-
         const dados =
             localStorage.getItem(
                 'userData'
             );
 
         if(!dados){
-
             return null;
         }
 
@@ -42,18 +38,20 @@ export class AuthService {
         );
     }
 
-    isLoggedIn():boolean {
+    getUserId():number {
+        const user = this.getUser();
+        return user?.id || 0;
+    }    
 
+    isLoggedIn():boolean {
         return !!localStorage.getItem(
             'userData'
         );
     }
 
     isAdmin():boolean {
-
         const usuario =
             this.getUser();
-
         return usuario?.admin || false;
     }
 

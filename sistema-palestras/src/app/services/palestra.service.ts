@@ -32,7 +32,6 @@ export class PalestraService {
 
     listarPalestras()
     :Observable<Palestra[]>{
-
         return this.http.get<Palestra[]>(
             `${this.apiUrl}/palestras`
         );
@@ -41,7 +40,6 @@ export class PalestraService {
     cadastrarEvento(
         dados:any
     ){
-
         return this.http.post(
             `${this.apiUrl}/admin`,
             dados
@@ -52,7 +50,6 @@ export class PalestraService {
         id:number,
         dados:any
     ){
-
         return this.http.put(
             `${this.apiUrl}/eventos/${id}`,
             dados
@@ -63,7 +60,6 @@ export class PalestraService {
         id:number,
         admin:boolean
     ){
-
         return this.http.delete(
             `${this.apiUrl}/eventos/${id}`,
             {
@@ -71,4 +67,12 @@ export class PalestraService {
             }
         );
     }
+
+    buscarPorId(
+        id:number
+    ){
+        return this.http.get(
+            `${this.apiUrl}/eventos/${id}`
+        );
+    }    
 }
