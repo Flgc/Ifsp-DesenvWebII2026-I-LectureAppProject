@@ -8,6 +8,9 @@ const authRoutes =
 const palestraRoutes =
 require("./routes/palestra.routes");    
 
+const inscricaoRoutes =
+require("./routes/inscricao.routes");
+
 const app = express();
 
 app.use(cors());
@@ -24,9 +27,14 @@ app.use(
     palestraRoutes
 );
 
+app.use(
+    "/api",
+    inscricaoRoutes
+);
+
 app.get("/", (req, res) => {
   res.json({
-    sistema: "Sistema de Palestras",
+    sistema: "Sistema de Palestras 2026-06",
     status: "online"
   });
 });
