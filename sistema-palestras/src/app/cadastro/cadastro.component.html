@@ -1,1 +1,65 @@
-<p>cadastro works!</p>
+<div class="container mt-5">
+ <div class="row justify-content-center">
+  <div class="col-md-6">
+   <div class="card shadow">
+    <div class="card-body">
+     <h2 class="text-center mb-4">
+       Cadastro
+     </h2>
+<!--      <div
+      *ngIf="mensagem"
+      class="alert"
+      [class.alert-danger]="erro"
+      [class.alert-success]="!erro">
+      {{mensagem}}
+     </div> -->     
+     @if (mensagem) {
+        <div class="alert" [class.alert-danger]="erro" [class.alert-success]="!erro">
+             {{ mensagem }}
+         </div>
+    }     
+     <form
+      [formGroup]="cadastroForm"
+      (ngSubmit)="cadastrar()">
+      <div class="mb-3">
+       <label>
+        Nome
+       </label>
+       <input
+        class="form-control"
+        formControlName="nome">
+      </div>
+      <div class="mb-3">
+       <label>
+        E-mail
+       </label>
+       <input
+        type="email"
+        class="form-control"
+        formControlName="email">
+      </div>
+      <div class="mb-3">
+       <label>
+        Senha
+       </label>
+       <input
+        type="password"
+        class="form-control"
+        formControlName="senha">
+      </div>
+      <button
+       class="btn btn-success w-100">
+       Cadastrar
+      </button>
+     </form>
+     <hr>
+     <a
+      routerLink="/login">
+      Já possui conta?
+      Faça Login
+     </a>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
