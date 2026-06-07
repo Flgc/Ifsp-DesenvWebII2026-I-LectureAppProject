@@ -68,11 +68,7 @@ export class PalestraService {
         );
     }
 
-    buscarPorId(
-        id:number
-    ){
-        return this.http.get(
-            `${this.apiUrl}/eventos/${id}`
-        );
-    }    
+    buscarPorId(id:number){
+        return this.http.get(`${this.apiUrl}/eventos/${id}`);
+    }        
 }

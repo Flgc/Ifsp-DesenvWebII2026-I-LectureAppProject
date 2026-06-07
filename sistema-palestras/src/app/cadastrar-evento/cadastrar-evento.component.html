@@ -1,0 +1,70 @@
+<div class="container mt-4">
+ <div class="card shadow">
+  <div class="card-body">
+   <h2>
+        Nova Palestra
+   </h2>
+
+<!--    <div
+    *ngIf="mensagem"
+    class="alert"
+    [class.alert-danger]="erro">
+    {{mensagem}}
+   </div>
+ -->
+   @if (mensagem) {
+       <div class="alert" [class.alert-danger]="erro">
+            {{ mensagem }}
+        </div>
+    }
+
+   <form
+    [formGroup]="form"
+    (ngSubmit)="salvar()">
+
+    <div class="mb-3">
+      <label>Título</label>
+      <input
+       class="form-control"
+       formControlName="titulo">
+    </div>
+
+    <div class="mb-3">
+      <label>Descrição</label>
+      <textarea
+       rows="5"
+       class="form-control"
+       formControlName="descricao">
+      </textarea>
+    </div>
+
+    <div class="mb-3">
+      <label>Palestrante</label>
+      <input
+       class="form-control"
+       formControlName="nomePalestrante">
+    </div>
+
+    <div class="mb-3">
+      <label>Local</label>
+      <input
+       class="form-control"
+       formControlName="localEvento">
+    </div>
+
+    <div class="mb-3">
+      <label>Data</label>
+      <input
+       type="datetime-local"
+       class="form-control"
+       formControlName="dataEvento">
+    </div>
+
+    <button
+     class="btn btn-success">
+     Salvar
+    </button>
+   </form>
+  </div>
+ </div>
+</div>
