@@ -1,81 +1,68 @@
-import {
- Component,
- OnInit
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject, PLATFORM_ID  } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { PalestraService } from '../services/palestra.service';
+import { InscricaoService } from '../services/inscricao.service';
+import { Palestra } from '../models/palestra';
 
-import {
- CommonModule
-} from '@angular/common';
-
-import {
- Router,
- RouterLink
-} from '@angular/router';
-
-import {
- AuthService
-} from '../services/auth.service';
-
-import {
- PalestraService
-} from '../services/palestra.service';
-
-import {
- InscricaoService
-} from '../services/inscricao.service';
-
-import {
- Palestra
-} from '../models/palestra';
-
-@Component({
- selector:'app-home',
- standalone:true,
- imports:[
+@Component({ selector:'app-home', standalone:true, imports:[
    CommonModule,
    RouterLink
  ],
  templateUrl:'./home.component.html'
 })
-export class HomeComponent
-implements OnInit {
+
+export class HomeComponent implements OnInit {
  palestras:Palestra[]=[];
  usuario:any;
  carregando=true;
+ erroMensagem = ''
 
  constructor(
    private auth:AuthService,
    private palestraService:PalestraService,
    private inscricaoService:InscricaoService,
-   private router:Router
+   private router:Router,
+   private cdr: ChangeDetectorRef,
+   @Inject(PLATFORM_ID) private platformId: object
  ){}
 
  ngOnInit():void{
-    if(
-      !this.auth.isLoggedIn()
-    ){
-      this.router.navigate(
-        ['/login']
-    );
-      return;
-    }  
-  this.usuario =
-  this.auth.getUser();
-  this.carregarEventos();
+    if (isPlatformBrowser(this.platformId)) {
+        console.log('HOME INICIADA');    
+        if(!this.auth.isLoggedIn()){    
+          console.log('NAO LOGADO');    
+          this.router.navigate(['/login']);
+          return;
+        }
+        console.log('LOGADO');    
+        this.usuario = this.auth.getUser();    
+        console.log('USUARIO', this.usuario);
+        this.carregarEventos();        
+    }    
  }
 
  carregarEventos(){
-   this.palestraService
-   .listarPalestras()
-   .subscribe({
-     next:(dados)=>{
-       this.palestras=dados;
-       this.carregando=false;
-     },
 
-     error:()=>{
-       this.carregando=false;
-     }
+    console.log('Iniciando carregamento');
+
+   this.palestraService.listarPalestras().subscribe({
+        next:(dados)=>{          
+          
+          console.log('DADOS RECEBIDOS', dados);
+
+            this.palestras = dados;
+            this.carregando = false;
+            this.cdr.detectChanges();  // força a atualização da view
+        },
+        error:(erro)=>{
+            
+          console.error('ERRO NA REQUISIÇÃO:', erro);
+            
+            this.erroMensagem = 'Falha ao carregar eventos. Verifique o servidor.';
+            this.carregando = false;
+     }  
    });
  }
 

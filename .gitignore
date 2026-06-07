@@ -11,17 +11,33 @@ yarn.lock
 # ========== Frontend (Angular) ==========
 # Dependências
 frontend/node_modules/
+.angular/
+dist/
+coverage/
+.tmp/
+frontend/dist/
 
 # Build outputs
 frontend/dist/
 frontend/.angular/
 frontend/tmp/
 frontend/out-tsc/
+build/
+out/
+release/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.production
 
 # Logs
 frontend/npm-debug.log
 frontend/yarn-error.log
 frontend/.npmrc
+logs/
+*.log
 
 # IDE / Editor
 .vscode/
@@ -29,6 +45,17 @@ frontend/.npmrc
 *.swp
 *.swo
 *~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Angular Cache
+frontend/.angular/
 
 # Arquivos de sistema operacional
 .DS_Store
@@ -46,6 +73,17 @@ coverage/
 *.sql
 *.backup
 *.bak
+*.sql.gz
+*.dump
 
 # Configuração do Angular CLI (versão local)
 .angular/
+
+# Temporary
+*.tmp
+*.temp
+*.bak
+
+# Secrets
+secret.json
+credentials.json

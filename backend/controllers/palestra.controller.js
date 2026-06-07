@@ -124,7 +124,7 @@ const listarEventos = async (req, res) => {
 };
 
 
-const buscarEventoPorId = async (req,res)=>{
+/* const buscarEventoPorId = async (req,res)=>{
     
     const { id } = req.params;
 
@@ -151,13 +151,9 @@ const buscarEventoPorId = async (req,res)=>{
         );
 
     }catch(error){
-
-        return res.status(500).json({
-            message:
-            "Erro interno"
-        });
+        return res.status(500).json({message: "Erro interno" });
     }
-};
+}; */
 
 const editarEvento = async (req, res) => {
 
@@ -229,6 +225,15 @@ const excluirEvento = async (req, res) => {
             message:
                 "Erro ao remover evento"
         });
+    }
+};
+
+const buscarEventoPorId = async (req, res) => {
+    try {
+        const evento = await Evento.findById(req.params.id); // ajuste conforme seu modelo
+        res.json(evento);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };
 
