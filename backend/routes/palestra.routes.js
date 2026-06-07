@@ -11,7 +11,8 @@ const {
     cadastrarEvento,
     listarEventos,
     editarEvento,
-    excluirEvento
+    excluirEvento,
+    buscarEventoPorId 
 } = require(
     "../controllers/palestra.controller"
 );
@@ -37,6 +38,11 @@ router.delete(
     "/eventos/:id",
     verificarAdmin,
     excluirEvento
+);
+
+router.get(
+    "/eventos/:id",
+    buscarEventoPorId
 );
 
 module.exports = router;

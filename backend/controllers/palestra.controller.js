@@ -123,6 +123,42 @@ const listarEventos = async (req, res) => {
     }
 };
 
+
+const buscarEventoPorId = async (req,res)=>{
+    
+    const { id } = req.params;
+
+    try{
+        const [rows] =
+        await conexao.execute(
+            `
+            SELECT *
+            FROM palestra
+            WHERE id = ?
+            `,
+            [id]
+        );
+
+        if(rows.length===0){
+            return res.status(404).json({
+                message:
+                "Evento não encontrado"
+            });
+        }
+
+        return res.json(
+            rows[0]
+        );
+
+    }catch(error){
+
+        return res.status(500).json({
+            message:
+            "Erro interno"
+        });
+    }
+};
+
 const editarEvento = async (req, res) => {
 
     const { id } = req.params;
@@ -136,7 +172,6 @@ const editarEvento = async (req, res) => {
     } = req.body;
 
     try {
-
         await conexao.execute(
             `
             UPDATE palestra
@@ -157,14 +192,11 @@ const editarEvento = async (req, res) => {
                 id
             ]
         );
-
         return res.status(200).json({
             message:
                 "Evento atualizado com sucesso"
         });
-
     } catch (error) {
-
         return res.status(500).json({
             message:
                 "Erro ao atualizar evento"
@@ -203,6 +235,7 @@ const excluirEvento = async (req, res) => {
 module.exports = {
     cadastrarEvento,
     listarEventos,
+    buscarEventoPorId,
     editarEvento,
     excluirEvento
 };
