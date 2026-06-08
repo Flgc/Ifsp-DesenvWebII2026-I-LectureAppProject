@@ -115,27 +115,21 @@ export class HomeComponent implements OnInit {
    );
  }
 
- excluirEvento(
-   id:number
- ){
-   const confirma =
-   confirm(
-    'Deseja excluir?'
-   );
+ excluirEvento(id:number){
+   const confirma = confirm('Deseja excluir este evento?');
    
    if(!confirma){
      return;
    }
 
-   this.palestraService
-   .excluirEvento(
-      id,
-      true
-   )
-   .subscribe({
+   this.palestraService.excluirEvento(id, true).subscribe({
      next:()=>{
-       this.carregarEventos();
-     }
+        alert('Evento excluído com sucesso!');
+        this.carregarEventos();  // recarrega a lista já está na home principal
+     },
+     error: (err) => {
+        alert('Erro ao excluir evento.');
+     }     
    });
  }
 

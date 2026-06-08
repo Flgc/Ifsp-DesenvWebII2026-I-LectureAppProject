@@ -38,14 +38,14 @@
  <div
   *ngIf="isAdmin()"
   class="mb-4">
-    <!-- DEPURAÇÃO: mostra tamanho do array e primeiro item -->
+<!--      DEPURAÇÃO: mostra tamanho do array e primeiro item 
     <div class="alert alert-info">
     <strong>Debug:</strong> Palestras carregadas? {{ palestras.length }} 
     <span *ngIf="palestras.length"> - Primeiro título: {{ palestras[0].titulo }}</span>
     </div>
 
-    <!-- DEPURAÇÃO: exibe o JSON bruto (opcional) -->
-    <pre *ngIf="palestras.length">{{ palestras | json }}</pre>
+    DEPURAÇÃO: exibe o JSON bruto (opcional) 
+    <pre *ngIf="palestras.length">{{ palestras | json }}</pre> -->
 
   <a
    routerLink="/admin"

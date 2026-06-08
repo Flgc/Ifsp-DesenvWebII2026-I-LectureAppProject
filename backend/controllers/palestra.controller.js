@@ -228,12 +228,45 @@ const excluirEvento = async (req, res) => {
     }
 };
 
-const buscarEventoPorId = async (req, res) => {
+/* const buscarEventoPorId = async (req, res) => {
     try {
         const evento = await Evento.findById(req.params.id); // ajuste conforme seu modelo
         res.json(evento);
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+}; */
+
+const buscarEventoPorId =
+async (req,res)=>{
+    const { id } = req.params;
+
+    try{
+        const [rows] =
+        await conexao.execute(
+            `
+            SELECT *
+            FROM palestra
+            WHERE id = ?
+            `,
+            [id]
+        );
+
+        if(rows.length===0){
+            return res.status(404).json({
+                message:
+                "Evento não encontrado"
+            });
+        }
+
+        return res.json(
+            rows[0]
+        );
+    }catch(error){
+        return res.status(500).json({
+            message:
+            "Erro interno"
+        });
     }
 };
 
